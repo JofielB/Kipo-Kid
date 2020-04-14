@@ -19,16 +19,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private Button btnTriangleR, btnTriangleL;
     private int index = 0;
     private ImageView plant,pot;
-
-    private int pots[] = {
-            R.drawable.maceta_uno,
-            R.drawable.pot_2,
-            R.drawable.pot_3
-    };
-    private int plants[] = {
-            R.drawable.plant,
-            R.drawable.plant_2,
-            R.drawable.plant_3
+    private UserPlant[] userPlants = {
+            new UserPlant("Solovino",new Sunflower(),R.drawable.maceta_uno),
+            new UserPlant("Melquiades",new Sunflower(),R.drawable.pot_3),
+            new UserPlant("Frida",new Sunflower(),R.drawable.pot_2),
+            new UserPlant("Plantin",new Sunflower(),R.drawable.pot_3),
+            new UserPlant("Kipo",new Sunflower(),R.drawable.maceta_uno),
     };
 
     @Override
@@ -56,18 +52,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View view) {
         if(view.getId() == R.id.btnTriangleRight){
             index++;
-            if(index>=3){
+            if(index>=(userPlants.length-1)){
                 index = 0;
             }
         }else{
             index--;
             if(index<0){
-                index = 2;
+                index = userPlants.length-1;
             }
         }
 
-        plant.setImageResource(plants[index]);
-        pot.setImageResource(pots[index]);
+        plant.setImageResource(userPlants[index].getPlant().getResourceIdImage());
+        pot.setImageResource(userPlants[index].getPot());
     }
 
 }
