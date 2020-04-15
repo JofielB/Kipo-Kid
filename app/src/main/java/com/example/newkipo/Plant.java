@@ -1,8 +1,16 @@
 package com.example.newkipo;
 
-abstract class Plant {
+ class Plant {
 
-    abstract String getPlanName();
+    public String getPlanName(){
+        return null;
+    }
 
-    abstract int getResourceIdImage();
+    public int getResourceIdImage(){
+        return 0;
+    }
+
+    public String getPlantInfo(){
+        return null;
+    }
 }

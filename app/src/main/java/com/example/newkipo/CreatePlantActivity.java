@@ -2,6 +2,8 @@ package com.example.newkipo;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,15 +14,29 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.InputStreamReader;
+import java.lang.reflect.Type;
+import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
+import java.util.List;
+
 
 public class CreatePlantActivity extends AppCompatActivity implements View.OnClickListener {
     private String plantName = "";
-    private Button btnDialog ;
+    private Button btnDialog, btnCreatePlant;
     private EditText editTextDialog;
     private TextView txtTitleName;
     private ImageView plants[] = new ImageView[3];
     private ImageView pots[] = new ImageView[3];
     private ImageView plant, pot;
+    private ArrayList<UserPlant> userPlants = new ArrayList<>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,9 +44,16 @@ public class CreatePlantActivity extends AppCompatActivity implements View.OnCli
         getSupportActionBar().hide(); //hide the title bar
         setContentView(R.layout.activity_create_plant);
 
+        try {
+            fetchData();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
         txtTitleName = findViewById(R.id.editText2);
         plant = findViewById(R.id.imageView5);
         pot = findViewById(R.id.imageView4);
+        btnCreatePlant = findViewById(R.id.btnCreate);
         plants[0] = findViewById(R.id.imgPlant1);
         plants[1] = findViewById(R.id.imgPlant2);
         plants[2] = findViewById(R.id.imgPlant3);
@@ -75,6 +98,18 @@ public class CreatePlantActivity extends AppCompatActivity implements View.OnCli
             }
         });
 
+        //CREATE PLANT BUTTON
+        btnCreatePlant.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //STORE THE NEW PLANT....
+
+                //FINISH THE CURRENT ACTIVITY
+                finish();
+            }
+        });
+
+        //PLANT NAME BUTTON TEXT
         txtTitleName.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -93,4 +128,24 @@ public class CreatePlantActivity extends AppCompatActivity implements View.OnCli
         }
     }
 
+    private void fetchData() throws FileNotFoundException {
+        FileInputStream fis = this.openFileInput("userPlants");
+        InputStreamReader inputStreamReader =
+                new InputStreamReader(fis, StandardCharsets.UTF_8);
+        StringBuilder stringBuilder = new StringBuilder();
+        try (BufferedReader reader = new BufferedReader(inputStreamReader)) {
+            String line = reader.readLine();
+            while (line != null) {
+                stringBuilder.append(line).append('\n');
+                line = reader.readLine();
+            }
+        } catch (Exception e) {
+            // Error occurred when opening raw file for reading.
+        } finally {
+            String contents = stringBuilder.toString();
+            Gson gson = new Gson();
+            ArrayList<UserPlant> userPlants = gson.fromJson(contents, new TypeToken<List<UserPlant>>(){}.getType());
+            Toast.makeText(this,""+ userPlants.get(0).getPlantName(),Toast.LENGTH_LONG).show();
+        }
+    }
 }

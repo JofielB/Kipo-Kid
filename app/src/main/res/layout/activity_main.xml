@@ -151,15 +151,29 @@
         app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
 
     <Button
+        android:id="@+id/btnInfo"
         android:layout_width="40dp"
         android:layout_height="40dp"
         style="@style/informationButton"
         android:text="!"
         android:textSize="25sp"
-        android:layout_marginTop="4dp"
+        android:layout_marginTop="8dp"
         android:layout_marginRight="4dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+
+    <Button
+        android:id="@+id/btnAddPlantMain"
+        style="@style/buttonPlus"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:text="+"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        android:layout_marginTop="8dp"
+        android:layout_marginRight="4dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnInfo" />
 
     <ImageView
         android:id="@+id/imgPlant"
