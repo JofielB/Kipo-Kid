@@ -56,6 +56,7 @@ public class AddPlantActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(AddPlantActivity.this, CreatePlantActivity.class);
                 startActivity(intent);
+                finish();
             }
         });
     }

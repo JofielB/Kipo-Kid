@@ -1,5 +1,4 @@
 package com.example.newkipo;
-
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -13,15 +12,13 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-
 import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.InputStreamReader;
-import java.lang.reflect.Type;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
@@ -36,6 +33,7 @@ public class CreatePlantActivity extends AppCompatActivity implements View.OnCli
     private ImageView pots[] = new ImageView[3];
     private ImageView plant, pot;
     private ArrayList<UserPlant> userPlants = new ArrayList<>();
+    private final String FILENAME = "userPlants";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,12 +41,6 @@ public class CreatePlantActivity extends AppCompatActivity implements View.OnCli
         requestWindowFeature(Window.FEATURE_NO_TITLE);//will hide the title
         getSupportActionBar().hide(); //hide the title bar
         setContentView(R.layout.activity_create_plant);
-
-        try {
-            fetchData();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
 
         txtTitleName = findViewById(R.id.editText2);
         plant = findViewById(R.id.imageView5);
@@ -103,9 +95,27 @@ public class CreatePlantActivity extends AppCompatActivity implements View.OnCli
             @Override
             public void onClick(View view) {
                 //STORE THE NEW PLANT....
+                try {
+                    //IN HERE WE FETCH THE ARRAYLIST OF THE PLANTS OF THE USER
+                    fetchData();
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                }
+                //TODO add other plants besides the sunflower
+                //THEN WE ADD A NEW PLANT TO THAT ARRAYLIST
+                userPlants.add( new UserPlant(txtTitleName.getText().toString(),new Sunflower(),R.drawable.pot_2));
+
+
+                //AND THEN WE SAVE THE ARRAYLIST WITH THE OLD PLANTS AND THE NEW ONE
+                saveData(userPlants);
+
 
                 //FINISH THE CURRENT ACTIVITY
+                Intent intent = new Intent(CreatePlantActivity.this, MainActivity.class);
+                startActivity(intent);
+
                 finish();
+
             }
         });
 
@@ -128,8 +138,16 @@ public class CreatePlantActivity extends AppCompatActivity implements View.OnCli
         }
     }
 
+    private void saveData(ArrayList<UserPlant> userPlants){
+        Gson gson = new Gson();
+        String jsonUserPlants = gson.toJson(userPlants);
+        try (FileOutputStream fos = this.openFileOutput(FILENAME, this.MODE_PRIVATE)) {
+            fos.write(jsonUserPlants.getBytes());
+        }catch(Exception e) {
+        }
+    }
     private void fetchData() throws FileNotFoundException {
-        FileInputStream fis = this.openFileInput("userPlants");
+        FileInputStream fis = this.openFileInput(FILENAME);
         InputStreamReader inputStreamReader =
                 new InputStreamReader(fis, StandardCharsets.UTF_8);
         StringBuilder stringBuilder = new StringBuilder();
@@ -144,8 +162,7 @@ public class CreatePlantActivity extends AppCompatActivity implements View.OnCli
         } finally {
             String contents = stringBuilder.toString();
             Gson gson = new Gson();
-            ArrayList<UserPlant> userPlants = gson.fromJson(contents, new TypeToken<List<UserPlant>>(){}.getType());
-            Toast.makeText(this,""+ userPlants.get(0).getPlantName(),Toast.LENGTH_LONG).show();
+            this.userPlants = gson.fromJson(contents, new TypeToken<List<UserPlant>>(){}.getType());
         }
     }
 }

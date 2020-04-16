@@ -3,12 +3,17 @@ package com.example.newkipo;
 public class UserPlant {
     String plantName;
     Plant plant;
-    int pot, daysOfLife;
+    int pot, daysOfLife, plantImage;
 
     public UserPlant(String plantName, Plant plant, int pot) {
         this.plantName = plantName;
         this.plant = plant;
+        plantImage = plant.getResourceIdImage();
         this.pot = pot;
+    }
+
+    public int getPlantImage(){
+        return plantImage;
     }
 
     public String getPlantName() {

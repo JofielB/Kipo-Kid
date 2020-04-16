@@ -1,7 +1,6 @@
 package com.example.newkipo;
 
 import java.util.ArrayList;
-import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class Sunflower extends Plant{
