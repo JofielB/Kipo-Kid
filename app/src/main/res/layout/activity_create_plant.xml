@@ -145,7 +145,8 @@
                             android:layout_marginRight="30dp"
                             android:padding="4dp"
                             android:background="@drawable/items_background"
-                            android:src="@drawable/maceta_uno"/>
+                            android:src="@drawable/maceta_uno"
+                            />
 
                         <ImageView
                             android:id="@+id/imgPot2"
@@ -154,7 +155,8 @@
                             android:layout_marginRight="30dp"
                             android:padding="4dp"
                             android:background="@drawable/items_background"
-                            android:src="@drawable/pot_2"/>
+                            android:src="@drawable/pot_2"
+                            />
 
                         <ImageView
                             android:id="@+id/imgPot3"
@@ -163,7 +165,8 @@
                             android:layout_marginRight="30dp"
                             android:padding="4dp"
                             android:background="@drawable/items_background"
-                            android:src="@drawable/pot_3"/>
+                            android:src="@drawable/pot_3"
+                           />
 
                     </LinearLayout>
 

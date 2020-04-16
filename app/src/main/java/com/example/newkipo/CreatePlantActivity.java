@@ -61,6 +61,10 @@ public class CreatePlantActivity extends AppCompatActivity implements View.OnCli
         pots[1].setOnClickListener(this);
         pots[2].setOnClickListener(this);
 
+        pots[0].setTag(R.drawable.maceta_uno);
+        pots[1].setTag(R.drawable.pot_2);
+        pots[2].setTag(R.drawable.pot_3);
+
         //CREATE THE DIALOG
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
@@ -103,7 +107,7 @@ public class CreatePlantActivity extends AppCompatActivity implements View.OnCli
                 }
                 //TODO add other plants besides the sunflower
                 //THEN WE ADD A NEW PLANT TO THAT ARRAYLIST
-                userPlants.add( new UserPlant(txtTitleName.getText().toString(),new Sunflower(),R.drawable.pot_2));
+                userPlants.add( new UserPlant(txtTitleName.getText().toString(),new Sunflower(),(Integer)pot.getTag()));
 
 
                 //AND THEN WE SAVE THE ARRAYLIST WITH THE OLD PLANTS AND THE NEW ONE
@@ -135,6 +139,8 @@ public class CreatePlantActivity extends AppCompatActivity implements View.OnCli
             plant.setImageDrawable(image.getDrawable());
         }else {
            pot.setImageDrawable(image.getDrawable());
+           //GET THE TAG SO I CAN KNOW THE ID OF THE SRC OF THE IMAGEVIEW CURRENTLY SELECTED
+           pot.setTag(image.getTag());
         }
     }
 
