@@ -1,15 +1,20 @@
 package com.example.newkipo;
 
+import java.util.ArrayList;
+import java.util.concurrent.ThreadLocalRandom;
+
 public class UserPlant {
     String plantName;
     Plant plant;
     int pot, daysOfLife, plantImage;
+    ArrayList<String> listOfInfo;
 
     public UserPlant(String plantName, Plant plant, int pot) {
         this.plantName = plantName;
         this.plant = plant;
         plantImage = plant.getResourceIdImage();
         this.pot = pot;
+        listOfInfo = plant.getPlantInfo();
     }
 
     public int getPlantImage(){
@@ -46,5 +51,10 @@ public class UserPlant {
 
     public void setDaysOfLife(int daysOfLife) {
         this.daysOfLife = daysOfLife;
+    }
+
+    public String getRandomInfo(){
+        int randomNum = ThreadLocalRandom.current().nextInt(0, listOfInfo.size());
+        return listOfInfo.get(randomNum);
     }
 }

@@ -26,10 +26,11 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     private Button btnTriangleR, btnTriangleL, btnInfo, btnAddPlant;
     private int index = 0;
-    private ImageView plant,pot;
+    private ImageView plant, pot, imgBtnDelete;
     private TextView plantName, txtDialogAlert;
     private ArrayList<UserPlant> userPlants = new ArrayList<>();
-   private final String FILENAME = "userPlants";
+    private final String FILENAME = "userPlants";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +45,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         //IMAGE
         plant = findViewById(R.id.imgPlant);
         pot = findViewById(R.id.imageView7);
+        imgBtnDelete = findViewById(R.id.imgBtnDelete);
 
         //BUTTONS
         btnAddPlant = findViewById(R.id.btnAddPlantMain);
@@ -96,7 +98,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         });
 
-        //CREATE THE DIALOG
+        //CREATE THE DIALOG OF INFO
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         LayoutInflater inflater = this.getLayoutInflater();
         builder.setView(inflater.inflate(R.layout.normal_dialog_alert, null));
@@ -110,7 +112,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                 //THE WIDGETS INSIDE THE DIALOG CAN BE MODIFY ONLY AFTER ITS SHOW
                 txtDialogAlert = dialog.findViewById(R.id.txtInfo);
-                txtDialogAlert.setText(userPlants.get(index).getPlant().getPlantInfo());
+                txtDialogAlert.setText(userPlants.get(index).getRandomInfo());
                 Button btnDialog = dialog.findViewById(R.id.btnDialog);
                 btnDialog.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -121,6 +123,45 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         });
 
+        //DELETE A PLANT
+        //CREATE THE DIALOG DELETE
+        AlertDialog.Builder builderDelete = new AlertDialog.Builder(this);
+        LayoutInflater inflaterDelete = this.getLayoutInflater();
+        builder.setView(inflater.inflate(R.layout.dialog_delete_alert, null));
+        final AlertDialog dialogDelete = builder.create();
+        //SET TRANSPARENT THE BACKGROUND AND SHOW IT
+        dialogDelete.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+        imgBtnDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialogDelete.show();
+                TextView txtPlantName = dialogDelete.findViewById(R.id.plantNameDelete);
+                txtPlantName.setText(userPlants.get(index).getPlantName());
+                Button btnNo = dialogDelete.findViewById(R.id.btnNo);
+                Button btnYes = dialogDelete.findViewById(R.id.btnYes);
+                //DONT DELETE THE PLANT
+                btnNo.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        dialogDelete.dismiss();
+                    }
+                });
+                //DELETE THE PLANT
+                btnYes.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        userPlants.remove(index);
+                        saveData(userPlants);
+                        //SET THE FIRST PLANT WHEN A PLANT ITS DELETED
+                        plant.setImageResource(userPlants.get(0).getPlantImage());
+                        pot.setImageResource(userPlants.get(0).getPot());
+                        plantName.setText(userPlants.get(0).getPlantName());
+                        Toast.makeText(MainActivity.this,"PLANT DELETED",Toast.LENGTH_LONG).show();
+                        dialogDelete.dismiss();
+                    }
+                });
+            }
+        });
     }
 
     @Override

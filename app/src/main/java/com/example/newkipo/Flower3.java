@@ -1,18 +1,17 @@
 package com.example.newkipo;
 
 import java.util.ArrayList;
-import java.util.concurrent.ThreadLocalRandom;
 
-public class Sunflower extends Plant{
+public class Flower3 extends Plant{
 
-    private final String plantName = "Sunflower";
-    private final int idImage = R.drawable.plant;
+    private final String plantName = "Flower 3";
+    private final int idImage = R.drawable.plant_3;
     private ArrayList<String> infoSunflower = new ArrayList<>();
 
-    public Sunflower() {
-        infoSunflower.add("Info 1 Sunflower");
-        infoSunflower.add("Info 2 Sunflower");
-        infoSunflower.add("Info 3 Sunflower");
+    public Flower3() {
+        infoSunflower.add("Info 1 Flower 3");
+        infoSunflower.add("Info 2 Flower 3");
+        infoSunflower.add("Info 3 Flower 3");
     }
     @Override
     public String getPlanName() {

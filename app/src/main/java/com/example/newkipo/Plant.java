@@ -1,6 +1,8 @@
 package com.example.newkipo;
 
- class Plant {
+import java.util.ArrayList;
+
+class Plant {
 
     public String getPlanName(){
         return null;
@@ -10,7 +12,7 @@ package com.example.newkipo;
         return 0;
     }
 
-    public String getPlantInfo(){
+    public ArrayList<String> getPlantInfo(){
         return null;
     }
 }

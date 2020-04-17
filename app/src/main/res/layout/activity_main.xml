@@ -77,6 +77,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
+            android:id="@+id/imgBtnDelete"
             android:layout_width="0dp"
             android:layout_height="30dp"
             android:layout_weight="1"

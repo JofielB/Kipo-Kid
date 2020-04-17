@@ -1,7 +1,6 @@
 package com.example.newkipo;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -53,17 +52,23 @@ public class CreatePlantActivity extends AppCompatActivity implements View.OnCli
         pots[1] = findViewById(R.id.imgPot2);
         pots[2] = findViewById(R.id.imgPot3);
 
+        //INITIALIZE TAGS
+        plant.setTag(1);
+        pot.setTag(R.drawable.maceta_uno);
+
+        plants[0].setTag(1);
+        plants[1].setTag(2);
+        plants[2].setTag(3);
         plants[0].setOnClickListener(this);
         plants[1].setOnClickListener(this);
         plants[2].setOnClickListener(this);
 
-        pots[0].setOnClickListener(this);
-        pots[1].setOnClickListener(this);
-        pots[2].setOnClickListener(this);
-
         pots[0].setTag(R.drawable.maceta_uno);
         pots[1].setTag(R.drawable.pot_2);
         pots[2].setTag(R.drawable.pot_3);
+        pots[0].setOnClickListener(this);
+        pots[1].setOnClickListener(this);
+        pots[2].setOnClickListener(this);
 
         //CREATE THE DIALOG
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -105,9 +110,10 @@ public class CreatePlantActivity extends AppCompatActivity implements View.OnCli
                 } catch (FileNotFoundException e) {
                     e.printStackTrace();
                 }
-                //TODO add other plants besides the sunflower
                 //THEN WE ADD A NEW PLANT TO THAT ARRAYLIST
-                userPlants.add( new UserPlant(txtTitleName.getText().toString(),new Sunflower(),(Integer)pot.getTag()));
+                int potSrc = (Integer) pot.getTag();
+                Plant currentPlant = getChosePlant();
+                userPlants.add( new UserPlant(txtTitleName.getText().toString(), currentPlant,potSrc));
 
 
                 //AND THEN WE SAVE THE ARRAYLIST WITH THE OLD PLANTS AND THE NEW ONE
@@ -132,16 +138,21 @@ public class CreatePlantActivity extends AppCompatActivity implements View.OnCli
         });
     }
 
+    //CHANGE THE PRINCIPAL PLANT DEPENDING OF THE USER CHOICE
     @Override
     public void onClick(View view) {
         ImageView image = (ImageView) view;
+
         if(image.getId() == R.id.imgPlant1||image.getId() == R.id.imgPlant2||image.getId() == R.id.imgPlant3){
             plant.setImageDrawable(image.getDrawable());
+            //GET THE TAG SO I CAN KNOW THE ID OF THE SRC OF THE IMAGEVIEW CURRENTLY SELECTED
+            plant.setTag(image.getTag());
         }else {
            pot.setImageDrawable(image.getDrawable());
            //GET THE TAG SO I CAN KNOW THE ID OF THE SRC OF THE IMAGEVIEW CURRENTLY SELECTED
            pot.setTag(image.getTag());
         }
+
     }
 
     private void saveData(ArrayList<UserPlant> userPlants){
@@ -152,6 +163,7 @@ public class CreatePlantActivity extends AppCompatActivity implements View.OnCli
         }catch(Exception e) {
         }
     }
+
     private void fetchData() throws FileNotFoundException {
         FileInputStream fis = this.openFileInput(FILENAME);
         InputStreamReader inputStreamReader =
@@ -169,6 +181,16 @@ public class CreatePlantActivity extends AppCompatActivity implements View.OnCli
             String contents = stringBuilder.toString();
             Gson gson = new Gson();
             this.userPlants = gson.fromJson(contents, new TypeToken<List<UserPlant>>(){}.getType());
+        }
+    }
+
+    private Plant getChosePlant(){
+        if((Integer) plant.getTag() == 1){
+            return new Sunflower();
+        }else if((Integer) plant.getTag() == 2){
+            return new Flower2();
+        }else{
+            return new Flower3();
         }
     }
 }
