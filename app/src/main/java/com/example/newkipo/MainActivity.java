@@ -1,6 +1,11 @@
 package com.example.newkipo;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
+import android.animation.AnimatorSet;
+import android.animation.ObjectAnimator;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -26,7 +31,7 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     private Button btnTriangleR, btnTriangleL, btnInfo, btnAddPlant;
     private int index = 0;
-    private ImageView plant, pot, imgBtnDelete;
+    private ImageView plant, pot, imgBtnDelete, imgBackgroundCloud;
     private TextView plantName, txtDialogAlert;
     private ArrayList<UserPlant> userPlants = new ArrayList<>();
     private final String FILENAME = "userPlants";
@@ -46,6 +51,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         plant = findViewById(R.id.imgPlant);
         pot = findViewById(R.id.imageView7);
         imgBtnDelete = findViewById(R.id.imgBtnDelete);
+        imgBackgroundCloud = findViewById(R.id.backgroundCloud);
 
         //BUTTONS
         btnAddPlant = findViewById(R.id.btnAddPlantMain);
@@ -87,6 +93,31 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
 
         }
+
+        //CREATE THE ANIMATIONS THAT CLOUD DOES IN VERTICAL
+        ObjectAnimator animationUP = ObjectAnimator.ofFloat(imgBackgroundCloud, "translationY", -10f);
+        //ANIMATION NOTE: I PUT THE SECOND ANIMATION TO 0F BECAUSE IT IS THE ORIGINAL Y COORDINATE
+        ObjectAnimator animationStart = ObjectAnimator.ofFloat(imgBackgroundCloud, "translationY", 0f);
+
+        //SET THE DURATION
+        animationUP.setDuration(1000);
+        animationStart.setDuration(1000);
+
+        //CREATE THE ANIMATION SET, DECIDE THE ORDER OF THE ANIMATIONS, START THE ANIMATION SET
+        final AnimatorSet animatorSet = new AnimatorSet();
+        animatorSet.play(animationUP).before(animationStart);
+        animatorSet.start();
+
+
+        //WE PUT A LISTENER TO THE LAS ANIMATION THAT WILL BE REPRODUCE SO WHEN IT END THE ANIMATIONSET RESTART CREATING A LOOP
+        animationStart.addListener(new AnimatorListenerAdapter() {
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                animatorSet.start();
+            }
+        });
+
+
 
         //GO TO CREATE PLANT ACTIVITY
         btnAddPlant.setOnClickListener(new View.OnClickListener() {
