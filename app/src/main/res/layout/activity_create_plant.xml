@@ -8,6 +8,17 @@
     tools:context=".CreatePlantActivity">
 
 
+    <ImageView
+        android:id="@+id/imgHomeButton"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:padding="2dp"
+        android:background="@drawable/button_plus"
+        android:scaleType="centerCrop"
+        android:src="@drawable/ic_home_black_24dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <TextView
         android:id="@+id/editText2"
         android:layout_width="200dp"

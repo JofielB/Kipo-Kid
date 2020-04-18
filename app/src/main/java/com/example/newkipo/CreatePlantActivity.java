@@ -30,6 +30,7 @@ public class CreatePlantActivity extends AppCompatActivity implements View.OnCli
     private Button btnDialog, btnCreatePlant;
     private EditText editTextDialog;
     private TextView txtTitleName;
+    private ImageView imgHome;
     private ImageView plants[] = new ImageView[3];
     private ImageView pots[] = new ImageView[3];
     private ImageView plant, pot;
@@ -43,16 +44,23 @@ public class CreatePlantActivity extends AppCompatActivity implements View.OnCli
         getSupportActionBar().hide(); //hide the title bar
         setContentView(R.layout.activity_create_plant);
 
-        txtTitleName = findViewById(R.id.editText2);
+        //IMAGE
+        imgHome = findViewById(R.id.imgHomeButton);
         plant = findViewById(R.id.imageView5);
         pot = findViewById(R.id.imageView4);
-        btnCreatePlant = findViewById(R.id.btnCreate);
         plants[0] = findViewById(R.id.imgPlant1);
         plants[1] = findViewById(R.id.imgPlant2);
         plants[2] = findViewById(R.id.imgPlant3);
         pots[0] = findViewById(R.id.imgPot1);
         pots[1] = findViewById(R.id.imgPot2);
         pots[2] = findViewById(R.id.imgPot3);
+
+        //EDIT TEXT
+        txtTitleName = findViewById(R.id.editText2);
+
+        //BUTTON
+        btnCreatePlant = findViewById(R.id.btnCreate);
+
 
         //INITIALIZE TAGS
         plant.setTag(1);
@@ -98,6 +106,16 @@ public class CreatePlantActivity extends AppCompatActivity implements View.OnCli
                     txtTitleName.setText(plantName);
                     dialog.dismiss();
                 }
+            }
+        });
+
+        //HOME BUTTON
+        imgHome.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(CreatePlantActivity.this, MainActivity.class);
+                startActivity(intent);
+                finish();
             }
         });
 
