@@ -32,7 +32,7 @@ import java.util.List;
 import java.util.TimeZone;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
-    private Button btnTriangleR, btnTriangleL, btnInfo, btnAddPlant;
+    private Button btnTriangleR, btnTriangleL, btnAddPlant;
     private int index = 0;
     private ImageView plant, pot, imgBtnDelete, imgBackgroundCloud;
     private TextView plantName, txtDialogAlert;
@@ -58,7 +58,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         //BUTTONS
         btnAddPlant = findViewById(R.id.btnAddPlantMain);
-        btnInfo = findViewById(R.id.btnInfo);
         btnTriangleR = findViewById(R.id.btnTriangleRight);
         btnTriangleL = findViewById(R.id.btnTriangleLeft);
         btnTriangleR.setOnClickListener(this);
@@ -158,7 +157,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         final AlertDialog dialog = builder.create();
         //SET TRANSPARENT THE BACKGROUND AND SHOW IT
         dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
-        btnInfo.setOnClickListener(new View.OnClickListener() {
+        imgBackgroundCloud.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 dialog.show();
