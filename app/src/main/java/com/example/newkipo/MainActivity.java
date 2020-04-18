@@ -204,10 +204,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     public void onClick(View view) {
                         userPlants.remove(index);
                         saveData(userPlants);
-                        //SET THE FIRST PLANT WHEN A PLANT ITS DELETED
-                        plant.setImageResource(userPlants.get(0).getPlantImage());
-                        pot.setImageResource(userPlants.get(0).getPot());
-                        plantName.setText(userPlants.get(0).getPlantName());
+                         //If after the delete of one plant there is no more plants we launch again the activity
+                        Intent intent = new Intent(MainActivity.this, MainActivity.class);
+                        startActivity(intent);
+                         finish();
                         Toast.makeText(MainActivity.this,"PLANT DELETED",Toast.LENGTH_LONG).show();
                         dialogDelete.dismiss();
                     }
