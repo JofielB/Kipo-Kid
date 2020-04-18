@@ -20,7 +20,9 @@ import java.io.FileOutputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
+import java.util.TimeZone;
 
 
 public class CreatePlantActivity extends AppCompatActivity implements View.OnClickListener {
@@ -111,10 +113,15 @@ public class CreatePlantActivity extends AppCompatActivity implements View.OnCli
                     e.printStackTrace();
                 }
                 //THEN WE ADD A NEW PLANT TO THAT ARRAYLIST
+                 //TAGS OF PLANT AND POT
                 int potSrc = (Integer) pot.getTag();
                 Plant currentPlant = getChosePlant();
-                userPlants.add( new UserPlant(txtTitleName.getText().toString(), currentPlant,potSrc));
+                 //DAY BORN
+                Calendar calendar = Calendar.getInstance(TimeZone.getDefault());
+                calendar.set(calendar.get(calendar.YEAR), calendar.get(calendar.MONTH), calendar.get(calendar.DATE));
+                long dateMill = calendar.getTimeInMillis();
 
+                userPlants.add( new UserPlant(txtTitleName.getText().toString(), currentPlant,potSrc, dateMill));
 
                 //AND THEN WE SAVE THE ARRAYLIST WITH THE OLD PLANTS AND THE NEW ONE
                 saveData(userPlants);

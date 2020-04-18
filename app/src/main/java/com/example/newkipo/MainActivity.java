@@ -26,7 +26,10 @@ import java.io.FileOutputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.TimeZone;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     private Button btnTriangleR, btnTriangleL, btnInfo, btnAddPlant;
@@ -90,6 +93,25 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 plant.setImageResource(userPlants.get(0).getPlantImage());
                 pot.setImageResource(userPlants.get(0).getPot());
                 plantName.setText(userPlants.get(0).getPlantName());
+
+                //SET THE DAYS OF LIFE OF THE PLANT
+                // Creates one calendars instances
+                Calendar calendar = Calendar.getInstance(TimeZone.getDefault());
+
+                //Set it to the current date
+                calendar.set(calendar.get(calendar.YEAR), calendar.get(calendar.MONTH), calendar.get(calendar.DATE));
+
+                // Get the represented date in milliseconds
+                long millis1 = calendar.getTimeInMillis();
+
+                // Calculate difference in milliseconds
+                long diff = userPlants.get(index).getDayBorn() - millis1;
+
+                // Calculate difference in days between the born day of the plant and the current day
+                long diffDays = diff / (24 * 60 * 60 * 1000);
+
+                TextView txtDaysOfLife = findViewById(R.id.txtDaysOfLife);
+                txtDaysOfLife.setText("" + diffDays);
             }
 
         }
@@ -108,7 +130,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         animatorSet.play(animationUP).before(animationStart);
         animatorSet.start();
 
-
         //WE PUT A LISTENER TO THE LAS ANIMATION THAT WILL BE REPRODUCE SO WHEN IT END THE ANIMATIONSET RESTART CREATING A LOOP
         animationStart.addListener(new AnimatorListenerAdapter() {
             @Override
@@ -116,6 +137,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 animatorSet.start();
             }
         });
+
 
 
 
