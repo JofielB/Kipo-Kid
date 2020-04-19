@@ -27,7 +27,6 @@ import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 import java.util.TimeZone;
 
@@ -94,23 +93,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 plantName.setText(userPlants.get(0).getPlantName());
 
                 //SET THE DAYS OF LIFE OF THE PLANT
-                // Creates one calendars instances
-                Calendar calendar = Calendar.getInstance(TimeZone.getDefault());
-
-                //Set it to the current date
-                calendar.set(calendar.get(calendar.YEAR), calendar.get(calendar.MONTH), calendar.get(calendar.DATE));
-
-                // Get the represented date in milliseconds
-                long millis1 = calendar.getTimeInMillis();
-
-                // Calculate difference in milliseconds
-                long diff = userPlants.get(index).getDayBorn() - millis1;
-
-                // Calculate difference in days between the born day of the plant and the current day
-                long diffDays = diff / (24 * 60 * 60 * 1000);
-
-                TextView txtDaysOfLife = findViewById(R.id.txtDaysOfLife);
-                txtDaysOfLife.setText("" + diffDays);
+                updateDaysOfLife();
             }
 
         }
@@ -216,6 +199,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         });
     }
 
+    //NEXT AND PREVIOUS BUTTONS
     @Override
     public void onClick(View view) {
         if(view.getId() == R.id.btnTriangleRight){
@@ -232,6 +216,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         plant.setImageResource(userPlants.get(index).getPlantImage());
         pot.setImageResource(userPlants.get(index).getPot());
         plantName.setText(userPlants.get(index).getPlantName());
+        //SET THE DAYS OF LIFE OF THE PLANT
+        updateDaysOfLife();
     }
 
     private void saveData(ArrayList<UserPlant> userPlants){
@@ -264,4 +250,23 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
+    private void updateDaysOfLife(){
+        // Creates one calendars instances
+        Calendar calendar = Calendar.getInstance(TimeZone.getDefault());
+
+        //Set it to the current date
+        calendar.set(calendar.get(calendar.YEAR), calendar.get(calendar.MONTH), calendar.get(calendar.DATE));
+
+        // Get the represented date in milliseconds
+        long millis1 = calendar.getTimeInMillis();
+
+        // Calculate difference in milliseconds: today - the day the plant was born
+        long diff = millis1 - userPlants.get(index).getDayBorn() ;
+
+        // Calculate difference in days between the born day of the plant and the current day
+        long diffDays = diff / (24 * 60 * 60 * 1000);
+
+        TextView txtDaysOfLife = findViewById(R.id.txtDaysOfLife);
+        txtDaysOfLife.setText("" + diffDays);
+    }
 }
