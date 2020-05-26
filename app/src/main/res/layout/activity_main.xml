@@ -49,25 +49,28 @@
         app:layout_constraintBottom_toTopOf="@+id/imageView3">
 
         <ImageView
-            android:id="@+id/imgIconSun"
+            android:id="@+id/task1"
             android:layout_width="0dp"
             android:layout_height="60dp"
             android:layout_weight="1"
             android:src="@drawable/sun" />
 
         <ImageView
+            android:id="@+id/task2"
             android:layout_width="0dp"
             android:layout_height="60dp"
             android:layout_weight="1"
             android:src="@drawable/water" />
 
         <ImageView
+            android:id="@+id/task3"
             android:layout_width="0dp"
             android:layout_height="60dp"
             android:layout_weight="1"
             android:src="@drawable/humidity" />
 
         <ImageView
+            android:id="@+id/task4"
             android:layout_width="0dp"
             android:layout_height="60dp"
             android:layout_weight="1"
@@ -94,33 +97,37 @@
             android:layout_marginTop="5dp"/>
 
         <ImageView
+            android:id="@+id/state1"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_marginLeft="16dp"
             android:layout_marginRight="-30dp"
             android:layout_weight="2"
-            android:src="@drawable/current_state" />
+            android:src="@drawable/state1" />
 
         <ImageView
+            android:id="@+id/state2"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_marginRight="-30dp"
             android:layout_weight="2"
-            android:src="@drawable/current_state" />
+            android:src="@drawable/state2" />
 
         <ImageView
+            android:id="@+id/state3"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_marginRight="-30dp"
             android:layout_weight="2"
-            android:src="@drawable/current_state" />
+            android:src="@drawable/state3" />
 
         <ImageView
+            android:id="@+id/state4"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_marginRight="16dp"
             android:layout_weight="2"
-            android:src="@drawable/current_state" />
+            android:src="@drawable/state4" />
 
         <RelativeLayout
             android:layout_width="0dp"

@@ -15,4 +15,31 @@ class Plant {
     public ArrayList<String> getPlantInfo(){
         return null;
     }
+
+    public int getDaysTask1(){
+        return 0;
+    }
+    public int getDaysTask2(){
+        return 0;
+    }
+    public int getDaysTask3(){
+        return 0;
+    }
+    public int getDaysTask4(){
+        return 0;
+    }
+
+    public int getMaxDaysUtilTask1(){
+        return 0;
+    }
+    public int getMaxDaysUtilTask2(){
+        return 0;
+    }
+    public int getMaxDaysUtilTask3(){
+        return 0;
+    }
+    public int getMaxDaysUtilTask4(){
+        return 0;
+    }
+
 }

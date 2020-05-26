@@ -33,7 +33,8 @@ import java.util.TimeZone;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     private Button btnTriangleR, btnTriangleL, btnAddPlant;
     private int index = 0;
-    private ImageView plant, pot, imgBtnDelete, imgBackgroundCloud;
+    private ImageView plant, pot, imgBtnDelete, imgBackgroundCloud, imgTask1, imgTask2,
+            imgTask3, imgTask4, imgState1, imgState2, imgState3, imgState4;
     private TextView plantName, txtDialogAlert;
     private ArrayList<UserPlant> userPlants = new ArrayList<>();
     private final String FILENAME = "userPlants";
@@ -54,6 +55,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         pot = findViewById(R.id.imageView7);
         imgBtnDelete = findViewById(R.id.imgBtnDelete);
         imgBackgroundCloud = findViewById(R.id.backgroundCloud);
+        imgTask1 = findViewById(R.id.task1);
+        imgTask2 = findViewById(R.id.task2);
+        imgTask3 = findViewById(R.id.task3);
+        imgTask4 = findViewById(R.id.task4);
+        imgState1 = findViewById(R.id.state1);
+        imgState2 = findViewById(R.id.state2);
+        imgState3 = findViewById(R.id.state3);
+        imgState4 = findViewById(R.id.state4);
 
         //BUTTONS
         btnAddPlant = findViewById(R.id.btnAddPlantMain);
@@ -94,6 +103,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                 //SET THE DAYS OF LIFE OF THE PLANT
                 updateDaysOfLife();
+
+                //SET THE CORRECT STATE IMAGES ON THE TOP BAR
+                updateTopBar();
             }
 
         }
@@ -197,6 +209,33 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 });
             }
         });
+
+        //BOTTOM TASKS ACTION
+        imgTask1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(MainActivity.this,""+userPlants.get(index).getDaysUntilTask1()+"\n" + userPlants.get(index).getMaxDaysUntilTask1(),Toast.LENGTH_SHORT).show();
+            }
+        });
+        imgTask2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(MainActivity.this,""+userPlants.get(index).getDaysUntilTask2()+"\n" + userPlants.get(index).getMaxDaysUntilTask2(),Toast.LENGTH_SHORT).show();
+            }
+        });
+        imgTask3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(MainActivity.this,""+userPlants.get(index).getDaysUntilTask3()+"\n" + userPlants.get(index).getMaxDaysUntilTask3(),Toast.LENGTH_SHORT).show();
+            }
+        });
+        imgTask4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(MainActivity.this,""+userPlants.get(index).getDaysUntilTask4()+"\n" + userPlants.get(index).getMaxDaysUntilTask4(),Toast.LENGTH_SHORT).show();
+            }
+        });
+
     }
 
     //NEXT AND PREVIOUS BUTTONS
@@ -218,6 +257,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         plantName.setText(userPlants.get(index).getPlantName());
         //SET THE DAYS OF LIFE OF THE PLANT
         updateDaysOfLife();
+        //Update de top bar
+        updateTopBar();
     }
 
     private void saveData(ArrayList<UserPlant> userPlants){
@@ -269,4 +310,34 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         TextView txtDaysOfLife = findViewById(R.id.txtDaysOfLife);
         txtDaysOfLife.setText("" + diffDays);
     }
+
+    private void updateTopBar(){
+        int task1Current = userPlants.get(index).getDaysUntilTask1();
+        int task1Max = userPlants.get(index).getMaxDaysUntilTask1();
+        setCorrectImageState(imgState1,task1Current,task1Max);
+
+        int task1Current2 = userPlants.get(index).getDaysUntilTask2();
+        int task1Max2 = userPlants.get(index).getMaxDaysUntilTask2();
+        setCorrectImageState(imgState2,task1Current2,task1Max2);
+
+        int task1Current3 = userPlants.get(index).getDaysUntilTask3();
+        int task1Max3 = userPlants.get(index).getMaxDaysUntilTask3();
+        setCorrectImageState(imgState3,task1Current3,task1Max3);
+
+        int task1Current4 = userPlants.get(index).getDaysUntilTask4();
+        int task1Max4 = userPlants.get(index).getMaxDaysUntilTask4();
+        setCorrectImageState(imgState4,task1Current4,task1Max4);
+    }
+    private void setCorrectImageState(ImageView imageView, int currentDays, int maxDays){
+        if(currentDays == maxDays){
+            imageView.setImageResource(R.drawable.state1);
+        }else if(currentDays>maxDays/2){
+            imageView.setImageResource(R.drawable.state2);
+        }else if(currentDays<=maxDays/2 && currentDays>0){
+            imageView.setImageResource(R.drawable.state3);
+        }else{
+            imageView.setImageResource(R.drawable.state4);
+        }
+    }
+
 }
