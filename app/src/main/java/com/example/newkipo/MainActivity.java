@@ -210,29 +210,133 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         });
 
-        //BOTTOM TASKS ACTION
+        //CREATE THE DIALOG OF THE TASKS
+        AlertDialog.Builder builderTask = new AlertDialog.Builder(this);
+        LayoutInflater inflaterTask = this.getLayoutInflater();
+        builder.setView(inflater.inflate(R.layout.dialog_tasks, null));
+        final AlertDialog dialogTask = builder.create();
+        //set transparent the background of the dialog box
+        dialogTask.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+
+        //BOTTOM TASKS BAR
         imgTask1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Toast.makeText(MainActivity.this,""+userPlants.get(index).getDaysUntilTask1()+"\n" + userPlants.get(index).getMaxDaysUntilTask1(),Toast.LENGTH_SHORT).show();
+                dialogTask.show();
+                TextView txt = dialogTask.findViewById(R.id.txtplantTask);
+                txt.setText("Actividad 1");
+                Button btnNo = dialogTask.findViewById(R.id.btnNoTask);
+                Button btnYes = dialogTask.findViewById(R.id.btnYesTask);
+                btnNo.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        dialogTask.dismiss();
+                    }
+                });
+                btnYes.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        //First we update the days until task 1 to the max
+                        userPlants.get(index).setDaysUntilTask1(userPlants.get(index).getMaxDaysUntilTask1());
+                        //We close the dialog
+                        dialogTask.dismiss();
+                        //Then we update the image of state of the plant
+                        updateTopBar();
+                        //And for the last we save the data
+                        saveData(userPlants);
+                    }
+                });
             }
         });
         imgTask2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Toast.makeText(MainActivity.this,""+userPlants.get(index).getDaysUntilTask2()+"\n" + userPlants.get(index).getMaxDaysUntilTask2(),Toast.LENGTH_SHORT).show();
+                dialogTask.show();
+                TextView txt = dialogTask.findViewById(R.id.txtplantTask);
+                txt.setText("Actividad 2");
+                Button btnNo = dialogTask.findViewById(R.id.btnNoTask);
+                Button btnYes = dialogTask.findViewById(R.id.btnYesTask);
+                btnNo.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        dialogTask.dismiss();
+                    }
+                });
+                btnYes.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        //First we update the days until task 1 to the max
+                        userPlants.get(index).setDaysUntilTask2(userPlants.get(index).getMaxDaysUntilTask2());
+                        //We close the dialog
+                        dialogTask.dismiss();
+                        //Then we update the image of state of the plant
+                        updateTopBar();
+                        //And for the last we save the data
+                        saveData(userPlants);
+                    }
+                });
             }
         });
         imgTask3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Toast.makeText(MainActivity.this,""+userPlants.get(index).getDaysUntilTask3()+"\n" + userPlants.get(index).getMaxDaysUntilTask3(),Toast.LENGTH_SHORT).show();
+                dialogTask.show();
+                TextView txt = dialogTask.findViewById(R.id.txtplantTask);
+                txt.setText("Actividad 3");
+                Button btnNo = dialogTask.findViewById(R.id.btnNoTask);
+                Button btnYes = dialogTask.findViewById(R.id.btnYesTask);
+                btnNo.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        dialogTask.dismiss();
+                    }
+                });
+                btnYes.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        //First we update the days until task 1 to the max
+                        userPlants.get(index).setDaysUntilTask3(userPlants.get(index).getMaxDaysUntilTask3());
+                        //We close the dialog
+                        dialogTask.dismiss();
+                        //Then we update the image of state of the plant
+                        updateTopBar();
+                        //And for the last we save the data
+                        saveData(userPlants);
+                    }
+                });
             }
         });
         imgTask4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Toast.makeText(MainActivity.this,""+userPlants.get(index).getDaysUntilTask4()+"\n" + userPlants.get(index).getMaxDaysUntilTask4(),Toast.LENGTH_SHORT).show();
+                dialogTask.show();
+                TextView txt = dialogTask.findViewById(R.id.txtplantTask);
+                txt.setText("Actividad 4");
+                Button btnNo = dialogTask.findViewById(R.id.btnNoTask);
+                Button btnYes = dialogTask.findViewById(R.id.btnYesTask);
+                btnNo.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        dialogTask.dismiss();
+                    }
+                });
+                btnYes.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        //First we update the days until task 1 to the max
+                        userPlants.get(index).setDaysUntilTask4(userPlants.get(index).getMaxDaysUntilTask4());
+                        //We close the dialog
+                        dialogTask.dismiss();
+                        //Then we update the image of state of the plant
+                        updateTopBar();
+                        //And for the last we save the data
+                        saveData(userPlants);
+                    }
+                });
             }
         });
 

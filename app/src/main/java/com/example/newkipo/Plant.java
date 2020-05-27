@@ -29,9 +29,7 @@ class Plant {
         return 0;
     }
 
-    public int getMaxDaysUtilTask1(){
-        return 0;
-    }
+    public int getMaxDaysUtilTask1(){ return 0; }
     public int getMaxDaysUtilTask2(){
         return 0;
     }

@@ -37,9 +37,8 @@ public class Sunflower extends Plant{
         return infoSunflower;
     }
 
-    public int getDaysTask1() {
-        return daysUntilTask1;
-    }
+
+    public int getDaysTask1() { return daysUntilTask1; }
 
     @Override
     public int getDaysTask2() {
@@ -57,14 +56,10 @@ public class Sunflower extends Plant{
     }
 
     @Override
-    public int getMaxDaysUtilTask1() {
-        return maxDaysUntilTask1;
-    }
+    public int getMaxDaysUtilTask1() { return maxDaysUntilTask1; }
 
     @Override
-    public int getMaxDaysUtilTask2() {
-        return maxDaysUntilTask2;
-    }
+    public int getMaxDaysUtilTask2() { return maxDaysUntilTask2; }
 
     @Override
     public int getMaxDaysUtilTask3() {

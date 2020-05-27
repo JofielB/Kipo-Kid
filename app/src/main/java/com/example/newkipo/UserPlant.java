@@ -109,4 +109,20 @@ public class UserPlant {
     public int getMaxDaysUntilTask4() {
         return maxDaysUntilTask4;
     }
+
+    public void setDaysUntilTask1(int daysUntilTask1) {
+        this.daysUntilTask1 = daysUntilTask1;
+    }
+
+    public void setDaysUntilTask2(int daysUntilTask2) {
+        this.daysUntilTask2 = daysUntilTask2;
+    }
+
+    public void setDaysUntilTask3(int daysUntilTask3) {
+        this.daysUntilTask3 = daysUntilTask3;
+    }
+
+    public void setDaysUntilTask4(int daysUntilTask4) {
+        this.daysUntilTask4 = daysUntilTask4;
+    }
 }
