@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private Button btnTriangleR, btnTriangleL, btnAddPlant;
     private int index = 0;
     private ImageView plant, pot, imgBtnDelete, imgBackgroundCloud, imgTask1, imgTask2,
-            imgTask3, imgTask4, imgState1, imgState2, imgState3, imgState4;
+            imgTask3, imgTask4, imgState1, imgState2, imgState3, imgState4, imgBackground;
     private TextView plantName, txtDialogAlert;
     private ArrayList<UserPlant> userPlants = new ArrayList<>();
     private final String FILENAME = "userPlants";
@@ -63,6 +63,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         imgState2 = findViewById(R.id.state2);
         imgState3 = findViewById(R.id.state3);
         imgState4 = findViewById(R.id.state4);
+        imgBackground = findViewById(R.id.imageView6);
 
         //BUTTONS
         btnAddPlant = findViewById(R.id.btnAddPlantMain);
@@ -426,7 +427,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         TextView txtDaysOfLife = findViewById(R.id.txtDaysOfLife);
         txtDaysOfLife.setText("" + diffDays);
     }
-    //TODO: do the method to update the days left to make a task, create another variable for the date of the last time the user make a task
+
     private void updateDaysOfTasks(){
         // Creates one calendars instances
         Calendar calendar = Calendar.getInstance(TimeZone.getDefault());
@@ -456,6 +457,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         currentPlant.setDaysUntilTask3((int)(currentPlant.getMaxDaysUntilTask3() - diffDays3));
         currentPlant.setDaysUntilTask4((int)(currentPlant.getMaxDaysUntilTask4() - diffDays4));
 
+        if(currentPlant.getDaysUntilTask1() < 1 || currentPlant.getDaysUntilTask2() < 1 || currentPlant.getDaysUntilTask3() < 1 || currentPlant.getDaysUntilTask4() < 1){
+            imgBackground.setImageResource(R.drawable.background_dry);
+        }else{
+            imgBackground.setImageResource(R.drawable.background);
+        }
         //Once the dates are update we have to update the top bar
         updateTopBar();
     }
