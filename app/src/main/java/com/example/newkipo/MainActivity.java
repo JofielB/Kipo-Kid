@@ -105,7 +105,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 updateDaysOfLife();
 
                 //SET THE CORRECT STATE IMAGES ON THE TOP BAR
-                updateTopBar();
+                updateDaysOfTasks();
             }
 
         }
@@ -238,11 +238,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     @Override
                     public void onClick(View view) {
                         //First we update the days until task 1 to the max
-                        userPlants.get(index).setDaysUntilTask1(userPlants.get(index).getMaxDaysUntilTask1());
+                        Calendar calendar = Calendar.getInstance(TimeZone.getDefault());
+                        calendar.set(calendar.get(calendar.YEAR), calendar.get(calendar.MONTH), calendar.get(calendar.DATE));
+                        long dateMill = calendar.getTimeInMillis();
+                        userPlants.get(index).setDateLastTask1(dateMill);
                         //We close the dialog
                         dialogTask.dismiss();
                         //Then we update the image of state of the plant
-                        updateTopBar();
+                        updateDaysOfTasks();
                         //And for the last we save the data
                         saveData(userPlants);
                     }
@@ -268,11 +271,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     @Override
                     public void onClick(View view) {
                         //First we update the days until task 1 to the max
-                        userPlants.get(index).setDaysUntilTask2(userPlants.get(index).getMaxDaysUntilTask2());
+                        Calendar calendar = Calendar.getInstance(TimeZone.getDefault());
+                        calendar.set(calendar.get(calendar.YEAR), calendar.get(calendar.MONTH), calendar.get(calendar.DATE));
+                        long dateMill = calendar.getTimeInMillis();
+                        userPlants.get(index).setDateLastTask2(dateMill);
                         //We close the dialog
                         dialogTask.dismiss();
                         //Then we update the image of state of the plant
-                        updateTopBar();
+                        updateDaysOfTasks();
                         //And for the last we save the data
                         saveData(userPlants);
                     }
@@ -298,11 +304,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     @Override
                     public void onClick(View view) {
                         //First we update the days until task 1 to the max
-                        userPlants.get(index).setDaysUntilTask3(userPlants.get(index).getMaxDaysUntilTask3());
+                        Calendar calendar = Calendar.getInstance(TimeZone.getDefault());
+                        calendar.set(calendar.get(calendar.YEAR), calendar.get(calendar.MONTH), calendar.get(calendar.DATE));
+                        long dateMill = calendar.getTimeInMillis();
+                        userPlants.get(index).setDateLastTask3(dateMill);
                         //We close the dialog
                         dialogTask.dismiss();
                         //Then we update the image of state of the plant
-                        updateTopBar();
+                        updateDaysOfTasks();
                         //And for the last we save the data
                         saveData(userPlants);
                     }
@@ -328,11 +337,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     @Override
                     public void onClick(View view) {
                         //First we update the days until task 1 to the max
-                        userPlants.get(index).setDaysUntilTask4(userPlants.get(index).getMaxDaysUntilTask4());
+                        Calendar calendar = Calendar.getInstance(TimeZone.getDefault());
+                        calendar.set(calendar.get(calendar.YEAR), calendar.get(calendar.MONTH), calendar.get(calendar.DATE));
+                        long dateMill = calendar.getTimeInMillis();
+                        userPlants.get(index).setDateLastTask4(dateMill);
                         //We close the dialog
                         dialogTask.dismiss();
                         //Then we update the image of state of the plant
-                        updateTopBar();
+                        updateDaysOfTasks();
                         //And for the last we save the data
                         saveData(userPlants);
                     }
@@ -362,7 +374,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         //SET THE DAYS OF LIFE OF THE PLANT
         updateDaysOfLife();
         //Update de top bar
-        updateTopBar();
+        updateDaysOfTasks();
     }
 
     private void saveData(ArrayList<UserPlant> userPlants){
@@ -413,6 +425,39 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         TextView txtDaysOfLife = findViewById(R.id.txtDaysOfLife);
         txtDaysOfLife.setText("" + diffDays);
+    }
+    //TODO: do the method to update the days left to make a task, create another variable for the date of the last time the user make a task
+    private void updateDaysOfTasks(){
+        // Creates one calendars instances
+        Calendar calendar = Calendar.getInstance(TimeZone.getDefault());
+
+        //Set it to the current date
+        calendar.set(calendar.get(calendar.YEAR), calendar.get(calendar.MONTH), calendar.get(calendar.DATE));
+
+        // Get the represented date in milliseconds
+        long millis1 = calendar.getTimeInMillis();
+
+        // Calculate difference in milliseconds: today - the day the user made the task
+        long diff = millis1 - userPlants.get(index).getDateLastTask1();
+        long diff2 = millis1 - userPlants.get(index).getDateLastTask2();
+        long diff3 = millis1 - userPlants.get(index).getDateLastTask3();
+        long diff4 = millis1 - userPlants.get(index).getDateLastTask4();
+
+        // Calculate difference in days between the last time the user make the task and today
+        long diffDays = diff / (24 * 60 * 60 * 1000);
+        long diffDays2 = diff2 / (24 * 60 * 60 * 1000);
+        long diffDays3 = diff3 / (24 * 60 * 60 * 1000);
+        long diffDays4 = diff4 / (24 * 60 * 60 * 1000);
+
+        //Update the daysUntilTask variables
+        UserPlant currentPlant = userPlants.get(index);
+        currentPlant.setDaysUntilTask1((int)(currentPlant.getMaxDaysUntilTask1() - diffDays));
+        currentPlant.setDaysUntilTask2((int)(currentPlant.getMaxDaysUntilTask2() - diffDays2));
+        currentPlant.setDaysUntilTask3((int)(currentPlant.getMaxDaysUntilTask3() - diffDays3));
+        currentPlant.setDaysUntilTask4((int)(currentPlant.getMaxDaysUntilTask4() - diffDays4));
+
+        //Once the dates are update we have to update the top bar
+        updateTopBar();
     }
 
     private void updateTopBar(){

@@ -76,17 +76,17 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical" >
+                android:layout_height="match_parent"
+                android:orientation="vertical">
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="27sp"
-                    android:textStyle="bold"
-                    android:textColor="#FFF"
                     android:gravity="center"
-                    android:text="PLANT" />
+                    android:text="PLANT"
+                    android:textColor="#FFF"
+                    android:textSize="27sp"
+                    android:textStyle="bold" />
 
                 <HorizontalScrollView
                     android:layout_width="match_parent"
@@ -103,27 +103,27 @@
                             android:layout_width="100dp"
                             android:layout_height="100dp"
                             android:layout_marginRight="30dp"
-                            android:padding="4dp"
                             android:background="@drawable/items_background"
-                            android:src="@drawable/plant"/>
+                            android:padding="4dp"
+                            android:src="@drawable/plant" />
 
                         <ImageView
                             android:id="@+id/imgPlant2"
                             android:layout_width="100dp"
                             android:layout_height="100dp"
                             android:layout_marginRight="30dp"
-                            android:padding="4dp"
                             android:background="@drawable/items_background"
-                            android:src="@drawable/plant_2"/>
+                            android:padding="4dp"
+                            android:src="@drawable/plant_2" />
 
                         <ImageView
                             android:id="@+id/imgPlant3"
                             android:layout_width="100dp"
                             android:layout_height="100dp"
                             android:layout_marginRight="30dp"
-                            android:padding="4dp"
                             android:background="@drawable/items_background"
-                            android:src="@drawable/plant_3"/>
+                            android:padding="4dp"
+                            android:src="@drawable/plant_3" />
 
                     </LinearLayout>
 
@@ -133,11 +133,11 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
-                    android:textSize="27sp"
-                    android:textStyle="bold"
-                    android:textColor="#FFF"
                     android:gravity="center"
-                    android:text="POT" />
+                    android:text="POT"
+                    android:textColor="#FFF"
+                    android:textSize="27sp"
+                    android:textStyle="bold" />
 
                 <HorizontalScrollView
                     android:layout_width="match_parent"
@@ -154,30 +154,27 @@
                             android:layout_width="100dp"
                             android:layout_height="100dp"
                             android:layout_marginRight="30dp"
-                            android:padding="4dp"
                             android:background="@drawable/items_background"
-                            android:src="@drawable/maceta_uno"
-                            />
+                            android:padding="4dp"
+                            android:src="@drawable/maceta_uno" />
 
                         <ImageView
                             android:id="@+id/imgPot2"
                             android:layout_width="100dp"
                             android:layout_height="100dp"
                             android:layout_marginRight="30dp"
-                            android:padding="4dp"
                             android:background="@drawable/items_background"
-                            android:src="@drawable/pot_2"
-                            />
+                            android:padding="4dp"
+                            android:src="@drawable/pot_2" />
 
                         <ImageView
                             android:id="@+id/imgPot3"
                             android:layout_width="100dp"
                             android:layout_height="100dp"
                             android:layout_marginRight="30dp"
-                            android:padding="4dp"
                             android:background="@drawable/items_background"
-                            android:src="@drawable/pot_3"
-                           />
+                            android:padding="4dp"
+                            android:src="@drawable/pot_3" />
 
                     </LinearLayout>
 
@@ -185,14 +182,14 @@
 
                 <Button
                     android:id="@+id/btnCreate"
+                    style="@style/buttonNormal"
                     android:layout_width="150dp"
                     android:layout_height="60dp"
-                    android:layout_marginTop="24dp"
                     android:layout_gravity="center_horizontal"
-                    style="@style/buttonNormal"
-                    android:textStyle="bold"
+                    android:layout_marginTop="24dp"
+                    android:text="Create"
                     android:textSize="24sp"
-                    android:text="Create"/>
+                    android:textStyle="bold" />
 
             </LinearLayout>
         </ScrollView>

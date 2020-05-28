@@ -7,10 +7,10 @@ public class Flower3 extends Plant{
     private final String plantName = "Flower 3";
     private final int idImage = R.drawable.plant_3;
     private ArrayList<String> infoSunflower = new ArrayList<>();
-    private int daysUntilTask1 = 0;
-    private int daysUntilTask2 = 0;
-    private int daysUntilTask3 = 0;
-    private int daysUntilTask4 = 0;
+    private int daysUntilTask1 = 10;
+    private int daysUntilTask2 = 9;
+    private int daysUntilTask3 = 7;
+    private int daysUntilTask4 = 6;
     private final int maxDaysUntilTask1 = 10;
     private final int maxDaysUntilTask2 = 9;
     private final int maxDaysUntilTask3 = 7;

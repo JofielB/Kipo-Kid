@@ -9,9 +9,9 @@ public class Sunflower extends Plant{
     private final int idImage = R.drawable.plant;
     private ArrayList<String> infoSunflower = new ArrayList<>();
     private int daysUntilTask1 = 5;
-    private int daysUntilTask2 = 3;
-    private int daysUntilTask3 = 1;
-    private int daysUntilTask4 = 0;
+    private int daysUntilTask2 = 4;
+    private int daysUntilTask3 = 3;
+    private int daysUntilTask4 = 2;
     private final int maxDaysUntilTask1 = 5;
     private final int maxDaysUntilTask2 = 4;
     private final int maxDaysUntilTask3 = 3;

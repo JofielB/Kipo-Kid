@@ -13,6 +13,12 @@ public class UserPlant {
     private int daysUntilTask2;
     private int daysUntilTask3;
     private int daysUntilTask4;
+
+    private long dateLastTask1;
+    private long dateLastTask2;
+    private long dateLastTask3;
+    private long dateLastTask4;
+
     private final int maxDaysUntilTask1;
     private final int maxDaysUntilTask2;
     private final int maxDaysUntilTask3;
@@ -27,6 +33,10 @@ public class UserPlant {
         this.pot = pot;
         listOfInfo = plant.getPlantInfo();
         this.dayBorn = dayBorn;
+        dateLastTask1 = dayBorn;
+        dateLastTask2 = dayBorn;
+        dateLastTask3 = dayBorn;
+        dateLastTask4 = dayBorn;
         daysUntilTask1 = plant.getDaysTask1();
         daysUntilTask2 = plant.getDaysTask2();
         daysUntilTask3 = plant.getDaysTask3();
@@ -110,6 +120,22 @@ public class UserPlant {
         return maxDaysUntilTask4;
     }
 
+    public long getDateLastTask1() {
+        return dateLastTask1;
+    }
+
+    public long getDateLastTask2() {
+        return dateLastTask2;
+    }
+
+    public long getDateLastTask3() {
+        return dateLastTask3;
+    }
+
+    public long getDateLastTask4() {
+        return dateLastTask4;
+    }
+
     public void setDaysUntilTask1(int daysUntilTask1) {
         this.daysUntilTask1 = daysUntilTask1;
     }
@@ -124,5 +150,21 @@ public class UserPlant {
 
     public void setDaysUntilTask4(int daysUntilTask4) {
         this.daysUntilTask4 = daysUntilTask4;
+    }
+
+    public void setDateLastTask1(long dateLastTask1) {
+        this.dateLastTask1 = dateLastTask1;
+    }
+
+    public void setDateLastTask2(long dateLastTask2) {
+        this.dateLastTask2 = dateLastTask2;
+    }
+
+    public void setDateLastTask3(long dateLastTask3) {
+        this.dateLastTask3 = dateLastTask3;
+    }
+
+    public void setDateLastTask4(long dateLastTask4) {
+        this.dateLastTask4 = dateLastTask4;
     }
 }
